@@ -45,4 +45,4 @@ UserSchema.loadClass(User);
 
 export type UserDocument = HydratedDocument<User>;
 
-export type UserMoelType = Model<UserDocument> & typeof User;
+export type UserModelType = Model<UserDocument> & typeof User;
