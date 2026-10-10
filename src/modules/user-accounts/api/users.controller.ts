@@ -23,7 +23,7 @@ export class UsersController {
   async createUser(@Body() body:any) {
     const userId=await this.usersService.createUser(body);
 
-    return this.usersQueryRepository.getByIdOrNotFoundFail(id);
+    return this.usersQueryRepository.getByIdOrNotFoundFail(userId);
   }
 
   @Delete(':id')
