@@ -1,6 +1,17 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { UsersService } from '../application/users.service';
 import { UsersQueryRepository } from '../infrastructure/query/users.query-repository';
+import { CreateUserInputDto } from './input-dto/users.unput-dto';
 
 @Controller('users')
 export class UsersController {
@@ -15,20 +26,20 @@ export class UsersController {
   }
 
   @Get()
-  async getAll(@Query() query:any ) {
-    return this.usersQueryRepository.getAll()
+  async getAll(@Query() query: any) {
+    return this.usersQueryRepository.getAll();
   }
 
   @Post()
-  async createUser(@Body() body:any) {
-    const userId=await this.usersService.createUser(body);
+  async createUser(@Body() body: CreateUserInputDto) {
+    const userId = await this.usersService.createUser(body);
 
     return this.usersQueryRepository.getByIdOrNotFoundFail(userId);
   }
 
   @Delete(':id')
-  @HttpCode(204)
-  async delete(@Param('id') id: string) {
-    return this.usersService.deleteUser(id)
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async deleteUser(@Param('id') id: string) {
+    return this.usersService.deleteUser(id);
   }
 }

@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Name, NameSchema } from './name.schema';
 import { HydratedDocument, Model } from 'mongoose';
+import { CreateUserDomainDto } from './dto/create-user.domain.dto';
 
 @Schema({ timestamps: true })
 export class User {
@@ -29,14 +30,22 @@ export class User {
     if (this.deletedAt !== null) {
       throw new Error('User has already been deleted.');
     }
+    this.deletedAt = new Date();
   }
 
-  // update(dto) {
-  //   if (dto.email !== this.email) {
-  //     this.isEmailConfirmed = false;
-  //   }
-  //   this.email = dto.email;
-  // }
+  static createUser(
+    this: UserModelType,
+    dto: CreateUserDomainDto,
+  ): UserDocument {
+    const user = new this();
+
+    user.login = dto.login;
+    user.email = dto.email;
+    user.passwordHash = dto.passwordHash;
+    user.isEmailConfirmed = false;
+
+    return user;
+  }
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
