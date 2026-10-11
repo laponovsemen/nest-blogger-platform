@@ -1,15 +1,15 @@
 export class PaginatedViewDto<T> {
-  items: T;
   pagesCount: number;
   page: number;
   pageSize: number;
   totalCount: number;
+  items: T;
 
   public static mapToView<T>(data: {
-    items: T;
     page: number;
     pageSize: number;
     totalCount: number;
+    items: T;
   }): PaginatedViewDto<T> {
     return {
       pagesCount: Math.ceil(data.totalCount / data.pageSize),

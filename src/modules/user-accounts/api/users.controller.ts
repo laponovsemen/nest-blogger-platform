@@ -12,6 +12,9 @@ import {
 import { UsersService } from '../application/users.service';
 import { UsersQueryRepository } from '../infrastructure/query/users.query-repository';
 import { CreateUserInputDto } from './input-dto/users.unput-dto';
+import { GetUsersQueryParams } from './input-dto/get-users-query-params.input-dto';
+import { PaginatedViewDto } from '../../../core/dto/base.paginated.view-dto';
+import { UserViewDto } from './view-dto/users.view-dto';
 
 @Controller('users')
 export class UsersController {
@@ -26,8 +29,10 @@ export class UsersController {
   }
 
   @Get()
-  async getAll(@Query() query: any) {
-    return this.usersQueryRepository.getAll();
+  async getAll(
+    @Query() query: GetUsersQueryParams,
+  ): Promise<PaginatedViewDto<UserViewDto[]>> {
+    return this.usersQueryRepository.getAll(query);
   }
 
   @Post()
