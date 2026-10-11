@@ -20,7 +20,7 @@ export class User {
   @Prop({ type: NameSchema })
   name: Name;
 
-  @Prop({ type: Date, nullable: true })
+  @Prop({ type: Date, default: null })
   deletedAt: Date | null;
 
   createdAt: Date;
