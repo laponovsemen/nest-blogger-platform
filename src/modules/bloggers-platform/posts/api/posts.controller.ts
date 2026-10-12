@@ -28,7 +28,7 @@ export class PostsController {
   ) {}
 
   @Get(':id')
-  async getById(@Param('param') id: string) {
+  async getById(@Param('id') id: string) {
     return this.postsQueryRepository.getByIdOrNotFoundFail(id);
   }
 
@@ -48,10 +48,7 @@ export class PostsController {
 
   @Put(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
-  async updatePost(
-    @Param('param') id: string,
-    @Body() body: UpdatePostInputDto,
-  ) {
+  async updatePost(@Param('id') id: string, @Body() body: UpdatePostInputDto) {
     await this.postsService.updatePost(id, body);
   }
 

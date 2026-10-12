@@ -21,8 +21,8 @@ export class PostsService {
     const post = this.PostModel.createPost({
       title: dto.title,
       content: dto.content,
-      blogId: dto.blogId,
       shortDescription: dto.shortDescription,
+      blogId: dto.blogId,
       blogName: blog.name,
     });
 

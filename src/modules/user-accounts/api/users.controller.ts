@@ -24,7 +24,7 @@ export class UsersController {
   ) {}
 
   @Get(':id')
-  async getById(@Param('param') id: string) {
+  async getById(@Param('id') id: string) {
     return this.usersQueryRepository.getByIdOrNotFoundFail(id);
   }
 

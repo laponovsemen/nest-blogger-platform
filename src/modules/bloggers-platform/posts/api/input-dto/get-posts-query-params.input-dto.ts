@@ -3,5 +3,4 @@ import { BaseQueryParams } from '../../../../../core/dto/base.query-params.input
 
 export class GetPostsQueryParams extends BaseQueryParams {
   sortBy: PostsSortBy = PostsSortBy.CreatedAt;
-  searchNameTerm: string | null = null;
 }
