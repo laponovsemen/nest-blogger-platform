@@ -11,10 +11,6 @@ export class UsersRepository {
     return this.UserModel.findOne({ _id: id, deletedAt: null });
   }
 
-  async save(user: UserDocument): Promise<void> {
-    await user.save();
-  }
-
   async findOrNotFoundFail(id: string): Promise<UserDocument> {
     const user = await this.findById(id);
 
@@ -23,5 +19,9 @@ export class UsersRepository {
     }
 
     return user;
+  }
+
+  async save(user: UserDocument): Promise<void> {
+    await user.save();
   }
 }

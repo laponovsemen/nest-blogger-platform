@@ -1,50 +1,55 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { CreateBlogDomainDto } from './dto/create-blog.domain.dto';
+import { CreatePostDomainDto } from './dto/create-post.domain.dto';
 import { HydratedDocument, Model } from 'mongoose';
-import { UpdateBlogDomainDto } from './dto/update-blog.domain.dto';
+import { UpdatePostDomainDto } from './dto/update-post.domain.dto';
 
 @Schema({ timestamps: true })
-export class Blog {
+export class Post {
   @Prop({ type: String, required: true, maxlength: 100 })
-  name: string;
+  title: string;
 
   @Prop({ type: String, maxlength: 1000 })
-  description: string;
+  shortDescription: string;
 
   @Prop({ type: String, maxlength: 1000 })
-  websiteUrl: string;
+  content: string;
 
-  @Prop({ type: Boolean, default: false })
-  isMembership: boolean;
+  @Prop({ type: String, required: true, maxlength: 100 })
+  blogId: string;
+
+  @Prop({ type: String, required: true, maxlength: 100 })
+  blogName: string;
 
   createdAt: Date;
   updatedAt: Date;
 
-  updateBlog(dto: UpdateBlogDomainDto) {
-    this.name = dto.name;
-    this.description = dto.description;
-    this.websiteUrl = dto.websiteUrl;
+  updatePost(dto: UpdatePostDomainDto) {
+    this.title = dto.title;
+    this.shortDescription = dto.shortDescription;
+    this.content = dto.content;
+    this.blogId = dto.blogId;
   }
 
-  static createBlog(
-    this: BlogModelType,
-    dto: CreateBlogDomainDto,
-  ): BlogDocument {
-    const blog = new this();
+  static createPost(
+    this: PostModelType,
+    dto: CreatePostDomainDto,
+  ): PostDocument {
+    const post = new this();
 
-    blog.name = dto.name;
-    blog.description = dto.description;
-    blog.websiteUrl = dto.websiteUrl;
-    blog.isMembership = false;
+    post.title = dto.title;
+    post.content = dto.content;
+    post.shortDescription = dto.shortDescription;
+    post.blogId = dto.blogId;
+    post.blogName = dto.blogName;
 
-    return blog;
+    return post;
   }
 }
 
-export const BlogSchema = SchemaFactory.createForClass(Blog);
+export const PostSchema = SchemaFactory.createForClass(Post);
 
-BlogSchema.loadClass(Blog);
+PostSchema.loadClass(Post);
 
-export type BlogDocument = HydratedDocument<Blog>;
+export type PostDocument = HydratedDocument<Post>;
 
-export type BlogModelType = Model<BlogDocument> & typeof Blog;
+export type PostModelType = Model<PostDocument> & typeof Post;

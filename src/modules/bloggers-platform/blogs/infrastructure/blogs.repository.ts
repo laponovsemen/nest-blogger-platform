@@ -11,14 +11,6 @@ export class BlogsRepository {
     return this.BlogModel.findById(id);
   }
 
-  async save(blog: BlogDocument): Promise<void> {
-    await blog.save();
-  }
-
-  async delete(id: string): Promise<void> {
-    await this.BlogModel.deleteOne({ _id: id });
-  }
-
   async findOrNotFoundFail(id: string): Promise<BlogDocument> {
     const blog = await this.findById(id);
 
@@ -27,5 +19,13 @@ export class BlogsRepository {
     }
 
     return blog;
+  }
+
+  async save(blog: BlogDocument): Promise<void> {
+    await blog.save();
+  }
+
+  async delete(id: string): Promise<void> {
+    await this.BlogModel.deleteOne({ _id: id });
   }
 }
