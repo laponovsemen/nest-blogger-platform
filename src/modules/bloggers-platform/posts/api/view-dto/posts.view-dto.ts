@@ -13,13 +13,7 @@ export class PostViewDto {
     likesCount: number;
     dislikesCount: number;
     myStatus: 'None' | 'Like' | 'Dislike';
-    newestLikes: [
-      {
-        addedAt: Date;
-        userId: string;
-        login: string;
-      },
-    ];
+    newestLikes: Like[];
   };
 
   static mapToView(post: PostDocument): PostViewDto {
@@ -49,3 +43,9 @@ export class PostViewDto {
     return dto;
   }
 }
+
+type Like = {
+  addedAt: Date;
+  userId: string;
+  login: string;
+};
