@@ -53,6 +53,8 @@ export class BlogsController {
     @Param('id') id: string,
     @Query() query: GetPostsQueryParams,
   ): Promise<PaginatedViewDto<PostViewDto[]>> {
+    await this.blogsRepository.findOrNotFoundFail(id);
+
     return this.postsQueryRepository.getAllPostsOfBlog(id, query);
   }
 
@@ -74,8 +76,6 @@ export class BlogsController {
       content: body.content,
       shortDescription: body.shortDescription,
     });
-
-    await this.blogsRepository.findOrNotFoundFail(blogId);
 
     return this.postsQueryRepository.getByIdOrNotFoundFail(postId);
   }
