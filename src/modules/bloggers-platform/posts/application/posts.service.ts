@@ -3,8 +3,8 @@ import { InjectModel } from '@nestjs/mongoose';
 import type { PostModelType } from '../domain/post.entity';
 import { Post } from '../domain/post.entity';
 import { PostsRepository } from '../infrastructure/posts.repository';
-import { CreatePostDto } from '../dto/create-post.dto';
-import { UpdatePostDto } from '../dto/update-post.dto';
+import { CreatePostDto } from './dto/create-post.dto';
+import { UpdatePostDto } from './dto/update-post.dto';
 import { BlogsRepository } from '../../blogs/infrastructure/blogs.repository';
 
 @Injectable()

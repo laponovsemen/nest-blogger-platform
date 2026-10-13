@@ -1,5 +1,5 @@
-import { CreatePostDto } from '../../dto/create-post.dto';
-import { UpdatePostDto } from '../../dto/update-post.dto';
+import { CreatePostDto } from '../../application/dto/create-post.dto';
+import { UpdatePostDto } from '../../application/dto/update-post.dto';
 
 export class CreatePostInputDto implements CreatePostDto {
   title: string;
