@@ -40,7 +40,7 @@ export class BlogsQueryRepository {
     const items = blogs.map(BlogViewDto.mapToView);
 
     return PaginatedViewDto.mapToView({
-      page: query.page,
+      page: query.pageNumber,
       pageSize: query.pageSize,
       totalCount,
       items,

@@ -36,7 +36,7 @@ export class PostsQueryRepository {
     const items = posts.map(PostViewDto.mapToView);
 
     return PaginatedViewDto.mapToView({
-      page: query.page,
+      page: query.pageNumber,
       pageSize: query.pageSize,
       totalCount,
       items,
@@ -61,7 +61,7 @@ export class PostsQueryRepository {
     const items = posts.map(PostViewDto.mapToView);
 
     return PaginatedViewDto.mapToView({
-      page: query.page,
+      page: query.pageNumber,
       pageSize: query.pageSize,
       totalCount,
       items,

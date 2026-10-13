@@ -24,11 +24,13 @@ import { PostViewDto } from '../../posts/api/view-dto/posts.view-dto';
 import { PostsQueryRepository } from '../../posts/infrastructure/query/posts.query-repository';
 import { CreatePostInputDto } from '../../posts/api/input-dto/posts.input-dto';
 import { PostsService } from '../../posts/application/posts.service';
+import { BlogsRepository } from '../infrastructure/blogs.repository';
 
 @Controller('blogs')
 export class BlogsController {
   constructor(
     private blogsService: BlogsService,
+    private blogsRepository: BlogsRepository,
     private blogsQueryRepository: BlogsQueryRepository,
     private postsService: PostsService,
     private postsQueryRepository: PostsQueryRepository,
@@ -72,6 +74,8 @@ export class BlogsController {
       content: body.content,
       shortDescription: body.shortDescription,
     });
+
+    await this.blogsRepository.findOrNotFoundFail(blogId);
 
     return this.postsQueryRepository.getByIdOrNotFoundFail(postId);
   }
