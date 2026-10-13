@@ -33,7 +33,7 @@ export class PostViewDto {
       myStatus: 'None',
       newestLikes: [
         {
-          addedAt: new Date(),
+          addedAt: post.createdAt,
           userId: '',
           login: '',
         },
