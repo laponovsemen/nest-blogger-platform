@@ -13,7 +13,7 @@ import { UsersService } from '../application/users.service';
 import { UsersQueryRepository } from '../infrastructure/query/users.query-repository';
 import { CreateUserInputDto } from './input-dto/users.input-dto';
 import { GetUsersQueryParams } from './input-dto/get-users-query-params.input-dto';
-import { PaginatedViewDto } from '../../../core/dto/base.paginated.view-dto';
+import { PaginatedViewDto } from '../../../../core/dto/base.paginated.view-dto';
 import { UserViewDto } from './view-dto/users.view-dto';
 
 @Controller('users')
