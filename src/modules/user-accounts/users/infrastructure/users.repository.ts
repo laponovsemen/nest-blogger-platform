@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import type { UserDocument, UserModelType } from '../domain/user.entity';
 import { User } from '../domain/user.entity';
+import type { QueryFilter } from 'mongoose';
 
 @Injectable()
 export class UsersRepository {
@@ -11,11 +12,26 @@ export class UsersRepository {
     return this.UserModel.findOne({ _id: id, deletedAt: null });
   }
 
-  async findOrNotFoundFail(id: string): Promise<UserDocument> {
+  async findByIdOrNotFoundFail(id: string): Promise<UserDocument> {
     const user = await this.findById(id);
 
     if (!user) {
       throw new NotFoundException(`User with id ${id} not found`);
+    }
+
+    return user;
+  }
+
+  async findByOrNotFoundFail(
+    query: QueryFilter<UserDocument>,
+  ): Promise<UserDocument> {
+    if (Object.keys(query).length === 0) {
+      throw new Error('Empty lookup query');
+    }
+    const user = await this.UserModel.findOne({ ...query, deletedAt: null });
+
+    if (!user) {
+      throw new NotFoundException(`User not found`);
     }
 
     return user;

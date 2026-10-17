@@ -50,6 +50,9 @@ export class User {
 
 export const UserSchema = SchemaFactory.createForClass(User);
 
+UserSchema.index({ login: 1 }, { unique: true });
+UserSchema.index({ email: 1 }, { unique: true });
+
 UserSchema.loadClass(User);
 
 export type UserDocument = HydratedDocument<User>;
