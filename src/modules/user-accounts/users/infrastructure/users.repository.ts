@@ -37,6 +37,12 @@ export class UsersRepository {
     return user;
   }
 
+  async findByLoginOrEmail(loginOrEmail: string): Promise<UserDocument | null> {
+    return this.UserModel.findOne({
+      $or: [{ login: loginOrEmail }, { email: loginOrEmail }],
+    });
+  }
+
   async save(user: UserDocument): Promise<void> {
     await user.save();
   }
