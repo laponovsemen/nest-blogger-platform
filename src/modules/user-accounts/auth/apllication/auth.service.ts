@@ -30,7 +30,7 @@ export class AuthService {
     return { userId: user._id.toString() };
   }
 
-  async login(id: string) {
+  login(id: string) {
     const accessToken = this.jwtService.sign({ id });
 
     return { accessToken };
