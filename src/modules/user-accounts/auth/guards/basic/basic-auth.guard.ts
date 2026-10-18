@@ -4,20 +4,23 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-
-let ADMIN_USERNAME = 'admin';
-let ADMIN_PASSWORD = 'qwerty';
+import { Request } from 'express';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class BasicAuthGuard implements CanActivate {
+  constructor(private readonly configService: ConfigService) {}
+
   canActivate(context: ExecutionContext): boolean {
-    const request = context.switchToHttp().getRequest();
+    const request = context.switchToHttp().getRequest<Request>();
     const auth = request.headers.authorization;
+
+    const username = this.configService.get<string>('ADMIN_USERNAME');
+    const password = this.configService.get<string>('ADMIN_PASSWORD');
+
     const expectedString =
       'Basic ' +
-      Buffer.from(ADMIN_USERNAME + ':' + ADMIN_PASSWORD, 'utf8').toString(
-        'base64',
-      );
+      Buffer.from(username + ':' + password, 'utf8').toString('base64');
 
     if (auth !== expectedString) {
       throw new UnauthorizedException();
