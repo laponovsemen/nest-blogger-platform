@@ -3,12 +3,27 @@ import { Name, NameSchema } from './name.schema';
 import { HydratedDocument, Model } from 'mongoose';
 import { CreateUserDomainDto } from './dto/create-user.domain.dto';
 
+export const loginConstraints = {
+  minLength: 3,
+  maxLength: 10,
+};
+
+export const passwordConstraints = {
+  minLength: 6,
+  maxLength: 20,
+};
+
+export const emailConstraints = {
+  minLength: 3,
+  maxLength: 254,
+};
+
 @Schema({ timestamps: true })
 export class User {
-  @Prop({ type: String, required: true })
+  @Prop({ type: String, required: true, ...loginConstraints })
   login: string;
 
-  @Prop({ type: String, required: true })
+  @Prop({ type: String, required: true, ...emailConstraints })
   email: string;
 
   @Prop({ type: String, required: true })
