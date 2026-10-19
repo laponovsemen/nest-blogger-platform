@@ -1,4 +1,4 @@
-import { DomainExceptionCodes } from './domain-exception-codes';
+import { DomainExceptionCode } from './domain-exception-code';
 
 export class Extension {
   constructor(
@@ -9,11 +9,11 @@ export class Extension {
 
 export class DomainException extends Error {
   message: string;
-  code: DomainExceptionCodes;
+  code: DomainExceptionCode;
   extensions: Extension[];
 
   constructor(errorInfo: {
-    code: DomainExceptionCodes;
+    code: DomainExceptionCode;
     message: string;
     extensions?: Extension[];
   }) {

@@ -1,4 +1,4 @@
-export enum DomainExceptionCodes {
+export enum DomainExceptionCode {
   //common
   NotFound = 1,
   BadRequest = 2,
@@ -6,7 +6,7 @@ export enum DomainExceptionCodes {
   Forbidden = 4,
   ValidationError = 5,
   //auth
-  Unathorized = 11,
+  Unauthorized = 11,
   EmailNotConfirmed = 12,
   ConfirmationCodeExpired = 13,
   PasswordRecoveryCodeExpired = 14,

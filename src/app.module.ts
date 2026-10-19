@@ -6,6 +6,9 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { CoreModule } from './core/core.module';
 import { BloggersPlatformModule } from './modules/bloggers-platform/bloggers-platform.module';
 import { TestingModule } from './modules/testing/testing.module';
+import { APP_FILTER } from '@nestjs/core';
+import { AllHttpExceptionsFilter } from './core/exeptions/filters/all-exceptions.filter';
+import { DomainHttpExceptionsFilter } from './core/exeptions/filters/domain-exceptions.filter';
 
 @Module({
   imports: [
@@ -16,6 +19,16 @@ import { TestingModule } from './modules/testing/testing.module';
     CoreModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_FILTER,
+      useClass: AllHttpExceptionsFilter,
+    },
+    {
+      provide: APP_FILTER,
+      useClass: DomainHttpExceptionsFilter,
+    },
+  ],
 })
 export class AppModule {}
