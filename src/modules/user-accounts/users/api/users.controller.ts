@@ -32,11 +32,15 @@ export class UsersController {
   async getAll(
     @Query() query: GetUsersQueryParams,
   ): Promise<PaginatedViewDto<UserViewDto[]>> {
+    console.log('==============GET============================');
+
     return this.usersQueryRepository.getAll(query);
   }
 
   @Post()
   async createUser(@Body() body: CreateUserInputDto) {
+    console.log('====================POST======================');
+
     const userId = await this.usersService.createUser(body);
 
     return this.usersQueryRepository.getByIdOrNotFoundFail(userId);

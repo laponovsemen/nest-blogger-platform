@@ -4,7 +4,7 @@ import {
 } from '../../../users/domain/user.entity';
 import { IsStringWithTrim } from '../../../../../core/decorators/validation/is-string-with-trim';
 
-export class LoginDto {
+export class LoginInputDto {
   @IsStringWithTrim(emailConstraints.minLength, emailConstraints.maxLength)
   loginOrEmail: string;
   @IsStringWithTrim(
