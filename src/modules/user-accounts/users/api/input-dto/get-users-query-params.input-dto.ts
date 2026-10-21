@@ -4,8 +4,9 @@ import { IsEnum, IsOptional, IsString } from 'class-validator';
 
 export class GetUsersQueryParams extends BaseQueryParams {
   @IsEnum(UsersSortBy)
+  @IsOptional()
   sortBy: UsersSortBy = UsersSortBy.CreatedAt;
-  
+
   @IsString()
   @IsOptional()
   searchLoginTerm: string | null = null;
