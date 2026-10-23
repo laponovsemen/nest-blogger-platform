@@ -13,7 +13,7 @@ const paths = tsconfig?.compilerOptions?.paths ?? {};
 const config: Config = {
   moduleFileExtensions: ['js', 'json', 'ts'],
   rootDir: '.',
-  testRegex: '.*\\.spec\\.ts$',
+  testRegex: '.*\\.(e2e-)?spec\\.ts$',
   extensionsToTreatAsEsm: ['.ts'],
   transform: {
     '^.+\\.(t|j)s$': ['ts-jest', { useESM: true }],
@@ -29,7 +29,6 @@ const config: Config = {
     'apps/**/*.(t|j)s',
   ],
   coverageDirectory: './coverage',
-  testEnvironment: 'node',
-};
+  testEnvironment: 'node',};
 
 export default config;
